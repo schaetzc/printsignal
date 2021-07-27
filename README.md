@@ -7,6 +7,8 @@ and then exits.
 
 All signals are caught, except SIGKILL and SIGSTOP.
 
+The command `strace -o '| { grep -m1 "^--- "; pkill -CONT -P $PPID sleep; pkill -P $PPID sleep; }' sleep inf` essentially does the same, but does not print signals sent directly to `strace`, for instance when pressing <kbd>Ctrl</kbd><kbd>C</kbd> or <kbd>Ctrl</kbd><kbd>Z</kbd> on the terminal. However, `strace` also catches SIGSTOP which `printsignal` cannot do.
+
 ## Compile
 
 Download this repository, then run `make`:
